@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <!--通话记录-->
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
+    <!--向通话日志(Call Log) 中插入语音邮件(voicemail)记录-->
+    <uses-permission android:name="android.permission.WRITE_VOICEMAIL" />
+    <!--sms-->
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_WAP_PUSH" />
+
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <!-- Adding -->
+                <!--                <action android:name="android.intent.action.SEND" />-->
+                <!--                <action android:name="android.intent.action.SENDTO" />-->
+
+                <!--                <category android:name="android.intent.category.DEFAULT" />-->
+                <!--                <category android:name="android.intent.category.BROWSABLE" />-->
+
+                <!--                <data android:scheme="sms" />-->
+                <!--                <data android:scheme="smsto" />-->
+                <!--                <data android:scheme="mms" />-->
+                <!--                <data android:scheme="mmsto" />-->
+                <!-- End Adding -->
+            </intent-filter>
+        </activity>
+
+
+        <!--随机-->
+        <service
+            android:name=".utils.InsertCallLogService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <!--固定手机号-->
+        <service
+            android:name=".utils.InsertCallLogService2"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+
+        <!--test-->
+        <activity
+            android:name=".Main2Activity"
+            android:exported="true"
+            android:theme="@style/AppTheme">
+
+            <!-- 具备短信默认应用条件 ① -->
+            <intent-filter>
+                <!-- Adding -->
+                <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.SENDTO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="sms" />
+                <data android:scheme="smsto" />
+                <data android:scheme="mms" />
+                <data android:scheme="mmsto" />
+                <!-- End Adding -->
+            </intent-filter>
+        </activity>
+
+
+<!--        <activity-->
+<!--            android:name=".Main3Activity"-->
+<!--            android:exported="false"-->
+<!--            android:theme="@style/AppTheme" />-->
+
+        <activity
+            android:name=".Main4Activity"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+
+        <!-- Adding -->
+        <!-- BroadcastReceiver that listens for incoming SMS messages -->
+        <receiver
+            android:name=".sms.SmsReceiver"
+            android:exported="true"
+            android:permission="android.permission.BROADCAST_SMS">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_DELIVER" />
+            </intent-filter>
+        </receiver>
+
+        <!-- BroadcastReceiver that listens for incoming MMS messages -->
+        <receiver
+            android:name=".sms.MmsReceiver"
+            android:exported="true"
+            android:permission="android.permission.BROADCAST_WAP_PUSH">
+
+            <intent-filter>
+                <action android:name="android.provider.Telephony.WAP_PUSH_DELIVER" />
+                <data android:mimeType="application/vnd.wap.mms-message" />
+            </intent-filter>
+
+        </receiver>
+        <!-- Service that delivers messages from the phone "quick response" -->
+        <service
+            android:name=".sms.SmsSendService"
+            android:exported="true"
+            android:permission="android.permission.SEND_RESPOND_VIA_MESSAGE">
+            <intent-filter>
+
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="sms" />
+                <data android:scheme="smsto" />
+                <data android:scheme="mms" />
+                <data android:scheme="mmsto" />
+            </intent-filter>
+        </service>
+        <!-- End Adding -->
+    </application>
+
+</manifest>

@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">InsertCallLogs</string>
+    <!--查看通话记录-->
+    <string name="view_call_logs">View CallLogs</string>
+
+    <string name="add_counts">一次插入记录数量配置：</string>
+    <string name="hint_counts">请输入插入数量</string>
+    <string name="hint_counts_num">10</string>
+    <string name="insert_counts_num">%d inserted successfully</string>
+    <string name="insert_wait">Insert call record Please wait</string>
+    <string name="insert_empty">The insertion quantity cannot be empty</string>
+    <string name="insert_phone">The phone cannot be empty</string>
+
+    <string name="rejected_call">您拒绝了通话记录权限</string>
+
+    <string name="insert_sms_logs">Insert SMSLogs</string>
+    <string name="view_sms_logs">View SMSLogs</string>
+    <string name="view_sms_defult">原默认短信App:</string>
+
+    <string name="defultpackageName">defultpackageName</string>
+
+
+    <string name="usephonetitle">请输入手机号：</string>
+    <string name="usephone">请输入手机号</string>
+    <string name="incoming">InComing</string>
+    <string name="outgoing">OutGoing</string>
+</resources>
